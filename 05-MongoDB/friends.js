@@ -11,7 +11,8 @@ db.samples_friends.find({name: /w/i})
 db.samples_friends.find({$and:[{season: 2},{number: 1}]})
 
 //5. Crea una consulta en la que aparezcan los primeros 5 capítulos.
-db.samples_friends.find({$and:[{number: {$gte: 1}},{number: {$lte: 5}}]})
+db.samples_friends.find({$and:[{season: 1},{number: {$lte: 5}}]})
+db.samples_friends.find().sort({season: 1}, {number: 1}).limit(5)
 
 //6. Crea una consulta en la que aparezcan todos los capítulos que empiecen por “The One”.
 db.samples_friends.find({name: /^The One/})

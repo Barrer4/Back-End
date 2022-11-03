@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+
+<body>
+   <div id="theBody"></div>
+   <div id="theFeedback"></div>
+</body>
+<script>
+   render()
+   function render() {
+      fetch('/api/libros')
+         .then(res => res.json())
+         .then(res => {
+            let html = ''
+            res.results.forEach(libro => {
+               html += `<tr><td>${libro.titulo}</td><td><button ${libro.estado ? 'disabled' : ''}  type="button" onclick="leer('${libro.titulo}')"> ${libro.estado ? 'Leído' : 'Leer'}</button></td><td><button type="button" onclick="eliminar('${libro.titulo}')">Eliminar</button></td></tr>`
+            })
+            document.getElementById('theBody').innerHTML = `<table><tr><th>Título</th><th>Estado</th><th></th>${html}</tr></table>`
+            document.getElementById('theFeedback').innerHTML = ''
+         })
+   }
+
+   function leer(titulo) {
+      fetch(`/api/editarLibro/${titulo}`, { method: 'PUT' })
+         .then(res => res.json())
+         .then(res => {
+            res.modificado
+               ? document.getElementById('theFeedback').innerHTML = '<p>El estado del libro ha sido modificado</p>'
+               : document.getElementById('theFeedback').innerHTML = '<p>El estado del libro NO ha sido modificado</p>'
+         })
+      render()
+   }
+
+   function eliminar(titulo) {
+      fetch(`/api/borrarLibro/${titulo}`, { method: 'DELETE' })
+         .then(res => res.json())
+         .then(res => {
+            res.eliminado
+               ? document.getElementById('theFeedback').innerHTML = '<p>El libro ha sido eliminado</p>'
+               : document.getElementById('theFeedback').innerHTML = '<p>El libro NO ha sido eliminado</p>'
+         })
+         render()
+   }
+</script>
+
+</html>
