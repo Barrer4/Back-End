@@ -77,25 +77,21 @@ function pedir() {
    </br>
    <form>
       <div class="form-group">
-         <input type="text" class="form-control form-control-sm" id="nombre2" aria-describedby="emailHelp" placeholder="Nombre">
+         <input type="text" class="form-control form-control-sm" id="nombre" aria-describedby="emailHelp" placeholder="Nombre">
       </div>
 
       <div class="form-group">
-         <input type="email" class="form-control form-control-sm" id="email2" aria-describedby="emailHelp" placeholder="Email">
-      </div>
-
-      <div class="form-group">
-         <input type="password" class="form-control form-control-sm" id="password2" placeholder="Contraseña">
+         <input type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" placeholder="Email">
       </div>
 
       <div class="form-group">
          <label for="fecha">Fecha de nacimiento</label>
-         <input type="date" class="form-control form-control-sm" id="fecha2" aria-describedby="emailHelp"
+         <input type="date" class="form-control form-control-sm" id="fecha" aria-describedby="emailHelp"
             placeholder="Fecha de nacimiento">
       </div>
 
       <div class="form-group">
-         <input type="text" class="form-control form-control-sm" id="ciudad2" aria-describedby="emailHelp" placeholder="Ciudad">
+         <input type="text" class="form-control form-control-sm" id="ciudad" aria-describedby="emailHelp" placeholder="Ciudad">
       </div>
 
       <div class="form-check">
@@ -123,14 +119,15 @@ function modificar() {
 
    </br>
    <h3>Datos:</h3>
+   <small id="emailHelp" class="form-text text-muted">Llene únicamente los campos que desea modificar.</small>
    </br>
    <form>
       <div class="form-group">
-         <input type="text" class="form-control form-control-sm" id="nombre2" aria-describedby="emailHelp" placeholder="Nombre">
+         <input type="text" class="form-control form-control-sm" id="nombre" aria-describedby="emailHelp" placeholder="Nombre">
       </div>
 
       <div class="form-group">
-         <input type="email" class="form-control form-control-sm" id="email2" aria-describedby="emailHelp" placeholder="Email">
+         <input type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" placeholder="Email">
       </div>
 
       <div class="form-group">
@@ -139,22 +136,21 @@ function modificar() {
 
       <div class="form-group">
          <label for="fecha">Fecha de nacimiento</label>
-         <input type="date" class="form-control form-control-sm" id="fecha2" aria-describedby="emailHelp"
+         <input type="date" class="form-control form-control-sm" id="fecha" aria-describedby="emailHelp"
             placeholder="Fecha de nacimiento">
       </div>
 
       <div class="form-group">
-         <input type="text" class="form-control form-control-sm" id="ciudad2" aria-describedby="emailHelp" placeholder="Ciudad">
+         <input type="text" class="form-control form-control-sm" id="ciudad" aria-describedby="emailHelp" placeholder="Ciudad">
       </div>
 
       <div class="form-check">
-      <input id="ads" type="checkbox" class="form-check-input" id="checkbox" disabled>
+      <input id="ads" type="checkbox" class="form-check-input" id="checkbox">
       <label class="form-check-label" for="checkbox" >Acepto las políticas de publicidad</label>
       </div>
 
-
-         </br>
-         <button type="button" class="btn btn-block" onclick="modificarUsuario()">Modificar</button>
+      </br>
+      <button type="button" class="btn btn-block" onclick="modificarUsuario()">Modificar</button>
       </form>
 
       <div id="feedback"></div>`
@@ -231,50 +227,14 @@ function pedirUsuario() {
          document.getElementById('feedback').innerHTML = `<p>${res.mensaje}</p>`
          res.error
             ? document.getElementById('feedback').style.color = 'red'
-            : (document.getElementById('feedback').style.color = 'green', document.getElementById('container').innerHTML = `
-            <form>
-               <div class="form-group">
-                  <input type="text" class="form-control form-control-sm" id="nombre" aria-describedby="emailHelp" placeholder="Nombre">
-               </div>
-      
-               <div class="form-group">
-                  <input type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" placeholder="Email">
-               </div>
-      
-               <div class="form-group">
-                  <input type="password" class="form-control form-control-sm" id="password" placeholder="Contraseña">
-               </div>
-      
-               <div class="form-group">
-                  <input type="text" class="form-control form-control-sm" id="dni" aria-describedby="emailHelp" placeholder="DNI">
-               </div>
-      
-               <div class="form-group">
-                  <label for="fecha">Fecha de nacimiento</label>
-                  <input type="date" class="form-control form-control-sm" id="fecha" aria-describedby="emailHelp"
-                     placeholder="Fecha de nacimiento">
-               </div>
-      
-               <div class="form-group">
-                  <input type="text" class="form-control form-control-sm" id="ciudad" aria-describedby="emailHelp" placeholder="Ciudad">
-               </div>
-               <div class="form-check">
-               <input id="ads" type="checkbox" class="form-check-input" id="checkbox" disabled>
-               <label class="form-check-label" for="checkbox">Acepto las políticas de publicidad</label>
-            </div>
-            </br>
-            <button type="button" class="btn btn-block" onclick="registrarUsuario()">Registrar</button>
-            
-               <div id="feedback"></div>
-            </form>`)
+            : (document.getElementById('feedback').style.color = 'green',
 
-         document.getElementById('nombre').value = res.data[0].nombre
-         document.getElementById('email').value = res.data[0].email
-         document.getElementById('password').value = res.data[0].password
-         document.getElementById('dni').value = res.data[0].dni
-         document.getElementById('fecha').value = res.data[0].fecha
-         document.getElementById('ciudad').value = res.data[0].ciudad
-         document.getElementById('ads').checked = res.data[0].ads
+               document.getElementById('nombre').value = res.data[0].nombre,
+               document.getElementById('email').value = res.data[0].email,
+               document.getElementById('dni').value = res.data[0].dni,
+               document.getElementById('fecha').value = res.data[0].fecha,
+               document.getElementById('ciudad').value = res.data[0].ciudad,
+               document.getElementById('ads').checked = res.data[0].ads)
 
          setTimeout(() => {
             document.getElementById('feedback').innerHTML = ''
@@ -311,18 +271,19 @@ function borrarUsuario() {
 }
 
 function modificarUsuario() {
-
+   console.log('inicio')
    let usuario = {
       dni: document.getElementById('dni').value,
       password: document.getElementById('password').value,
-      nombre: document.getElementById('nombre2').value,
-      email: document.getElementById('email2').value,
-      password2: document.getElementById('password2').value,
-      fecha: document.getElementById('fecha2').value,
-      ciudad: document.getElementById('ciudad2').value,
-      ads: document.getElementById('ads2').value = res.data[0].ads ? true : false
+      nombre: document.getElementById('nombre').value,
+      email: document.getElementById('email').value,
+      password2: document.getElementById('password2').value.length < 1
+         ? document.getElementById('password').value
+         : document.getElementById('password2').value,
+      fecha: document.getElementById('fecha').value,
+      ciudad: document.getElementById('ciudad').value,
+      ads: document.getElementById('ads').checked 
    }
-
 
    fetch('usuarios/modificar', {
       method: 'PUT',

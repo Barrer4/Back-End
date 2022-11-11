@@ -35,5 +35,9 @@ button.btn.btn-block {
    padding: 120px 1rem;
    justify-content: center;
    text-align: center;
-   border: 2px solid green;
+}
+
+.form-check-label {
+   font-size: small;
+   font-weight: bold;
 }

@@ -24,7 +24,7 @@ usuarios.post('/login', (req, res) => {
                ? res.send({ error: true, mensaje: 'Problemas con las credenciales', data: data })
                : bcrypt.compareSync(req.body.password, data[0].password)
                   ? res.send({ error: false, mensaje: 'Login exitoso', data: data })
-                  : res.send({ error: true, mensaje: 'La contraseña indicada es incorrecta', data: data })
+                  : res.send({ error: true, mensaje: 'Problemas con las credenciales', data: data })
       })
 })
 
