@@ -52,16 +52,15 @@ app.post('/api/nuevoLibro/:titulo', (req, res) => {
       .toArray((err, data) => {
          err
             ? res.send({ mensaje: 'Error: No se ha podido encontrar el título en la base de datos', data: err })
-            : res.send({
-               mensaje: data.length > 0 ? req.params.titulo + ' ya se encuentra en la base de datos'
-                  : app.locals.db
-                     .collection("libros")
-                     .insertOne({ titulo: req.params.titulo, estado: false }, (err, data) => {
-                        err
-                           ? res.send({ mensaje: 'Error: No se ha podido agregar la información a la base de datos', err })
-                           : res.send({ mensaje: req.params.titulo + ' se ha añadido a la base de datos', data })
-                     })
-            })
+            : data.length > 0
+               ? res.send({ mensaje: req.params.titulo + ' ya se encuentra en la base de datos', data: data })
+               : app.locals.db
+                  .collection("libros")
+                  .insertOne({ titulo: req.params.titulo, estado: false }, (err1, data1) => {
+                     err1
+                        ? res.send({ error: 'Error: No se ha podido agregar la información a la base de datos', data: err1 })
+                        : res.send({ mensaje: req.params.titulo + ' se ha añadido a la base de datos', data: data1 })
+                  })
       })
 })
 
@@ -76,14 +75,14 @@ app.put('/api/editarLibro/:titulo', (req, res) => {
             : data.length > 0
                ? app.locals.db
                   .collection("libros")
-                  .updateOne({ titulo: req.params.titulo }, { $set: { estado: true } }, (err, data) => {
-                     err
-                        ? res.send({ mensaje: 'Error: No se ha podido modificar la base de datos', data: err })
-                        : data.modifiedCount > 0
-                           ? res.send({ modificado: data.modifiedCount > 0, mensaje: req.params.titulo + ' ha cambiado al estado leído', data })
-                           : res.send({ mensaje: req.params.titulo + ' ya ha sido leído', data })
+                  .updateOne({ titulo: req.params.titulo }, { $set: { estado: true } }, (err1, data1) => {
+                     err1
+                        ? res.send({ mensaje: 'Error: No se ha podido modificar la base de datos', data: err1 })
+                        : data1.modifiedCount > 0
+                           ? res.send({ modificado: data1.modifiedCount > 0, mensaje: req.params.titulo + ' ha cambiado al estado leído', data: data1 })
+                           : res.send({ mensaje: req.params.titulo + ' ya ha sido leído', data: data1 })
                   })
-               : res.send({ mensaje: req.params.titulo + ' no se encuentra en la base de datos', data })
+               : res.send({ mensaje: req.params.titulo + ' no se encuentra en la base de datos', data: data1 })
       })
 })
 
@@ -98,18 +97,18 @@ app.delete('/api/borrarLibro/:titulo', (req, res) => {
             : data.length > 0
                ? app.locals.db
                   .collection("libros")
-                  .deleteOne({ titulo: req.params.titulo }, (err, data) => {
-                     err
-                        ? res.send({ mensaje: 'Error: ', data: err })
-                        : res.send({ eliminado: data.deletedCount > 0, mensaje: 'Las patas han sido modificadas', data })
+                  .deleteOne({ titulo: req.params.titulo }, (err1, data1) => {
+                     err1
+                        ? res.send({ mensaje: 'Error: ', data: err1 })
+                        : res.send({ eliminado: data.deletedCount > 0, mensaje: 'Las patas han sido modificadas', data: data1 })
                   })
                : res.send({ mensaje: req.params.titulo + ' no se encuentra en la base de datos', data })
       })
-   })
+})
 
 
-   app.listen(port, err => {
-      err
-         ? console.error('🔴 Error: ' + err)
-         : console.log('🟢 Funcionando en http://localhost:' + port)
-   })
+app.listen(port, err => {
+   err
+      ? console.error('🔴 Error: ' + err)
+      : console.log('🟢 Funcionando en http://localhost:' + port)
+})

@@ -1,0 +1,58 @@
+body {
+   background-color: #CCC9CF;
+   font-family: 'Nunito', sans-serif;
+   padding: 4rem;
+}
+
+h1 {
+   text-align: center;
+}
+#theBody {
+   margin-top: 3.5rem;
+}
+
+#theFeedback {
+   margin-top: 3.5rem;
+   font-size: larger;
+   text-align: center;
+}
+form {
+   margin-top: 3.5rem;
+   margin-bottom: 3.5rem;
+   contain: content;
+}
+
+.form-control {
+   border: 1px solid black;
+   color: #59545E;
+}
+
+.form-control::placeholder {
+   color: #59545E;
+   opacity: 0.8;
+}
+
+.btn-block {
+   margin-top: 1rem;
+   background-color: #59545E;
+   border: 2px solid transparent;
+   border-radius: 5px;
+}
+
+.btn-block:hover {
+   background-color: #59545E;
+   border: 2px solid #3F3C42;
+}
+
+
+tr {
+   border: 2px solid #D8D6DA;
+}
+thead {
+   font-size: larger;
+}
+
+table, .table.table-bordered {
+   text-align: center;
+   border: 2px solid #3F3C42;
+}

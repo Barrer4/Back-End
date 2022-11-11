@@ -5,12 +5,26 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link rel="stylesheet" href="index.css">
+   <title>Libros</title>
 </head>
 
 
 <body>
+   <h1 class="display-3">Libros</h1>
    <div id="theBody"></div>
+   <form>
+      <div class="row">
+         <div class="col">
+            <input id="titulo" type="text" class="form-control form-control-sm" placeholder="Título">
+         </div>
+      </div>
+      <div class="row">
+         <button type="button" class="btn btn-primary btn-sm btn-block" onclick="agregar()">Agregar libro</button>
+      </div>
+   </form>
    <div id="theFeedback"></div>
 </body>
 <script>
@@ -21,17 +35,58 @@
          .then(res => {
             let html = ''
             res.results.forEach(libro => {
-               html += `<tr><td>${libro.titulo}</td><td><button ${libro.estado ? 'disabled' : ''}  type="button" onclick="leer('${libro.titulo}')"> ${libro.estado ? 'Leído' : 'Leer'}</button></td><td><button type="button" onclick="eliminar('${libro.titulo}')">Eliminar</button></td></tr>`
+               html += `
+               <tr>
+                  <td>${libro.titulo}</td>
+                  <td>
+                     <button ${libro.estado ? 'disabled' : ''}  type="button" onclick="leer('${libro.titulo}')"> ${libro.estado ? 'Leído' : 'Leer'}</button>
+                  </td>
+                  <td>
+                     <button type="button" onclick="eliminar('${libro.titulo}')">Eliminar</button>
+                  </td>
+               </tr>
+                  `
             })
-            document.getElementById('theBody').innerHTML = `<table><tr><th>Título</th><th>Estado</th><th></th>${html}</tr></table>`
+            document.getElementById('theBody').innerHTML = ` 
+            <table class="table table-bordered"> 
+               <thead class="thead-dark">
+                  <tr>
+                  <th>Título</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+               </tr>
+               </thead>
+               <tbody>
+                  ${html}
+               </tbody>
+               </table>
+               `
             document.getElementById('theFeedback').innerHTML = ''
          })
    }
+
+   function agregar() {
+      fetch(('/api/nuevoLibro/' + document.getElementById('titulo').value), { method: 'POST' })
+         .then(res => res.json())
+         .then(res => {
+            console.log(res)
+            console.log(res.mensaje)
+            console.log(res.error)
+            res.mensaje
+               ? document.getElementById('theFeedback').innerHTML = res.mensaje
+               : document.getElementById('theFeedback').innerHTML = res.error
+         })
+      render()
+   }
+
+
+
 
    function leer(titulo) {
       fetch(`/api/editarLibro/${titulo}`, { method: 'PUT' })
          .then(res => res.json())
          .then(res => {
+
             res.modificado
                ? document.getElementById('theFeedback').innerHTML = '<p>El estado del libro ha sido modificado</p>'
                : document.getElementById('theFeedback').innerHTML = '<p>El estado del libro NO ha sido modificado</p>'
@@ -47,7 +102,7 @@
                ? document.getElementById('theFeedback').innerHTML = '<p>El libro ha sido eliminado</p>'
                : document.getElementById('theFeedback').innerHTML = '<p>El libro NO ha sido eliminado</p>'
          })
-         render()
+      render()
    }
 </script>
 
