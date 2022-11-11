@@ -1,0 +1,48 @@
+body {
+   background-color: #e4b4bd;
+   font-family: 'Nunito', sans-serif;
+   padding: 4rem;
+}
+#theBody {
+   margin-top: 3.5rem;
+}
+
+#theFeedback {
+   margin-top: 3.5rem;
+   font-size: larger;
+   text-align: center;
+}
+form {
+   margin-top: 3.5rem;
+   margin-bottom: 3.5rem;
+   contain: content;
+}
+
+
+.form-control {
+   border: 1px solid #832F3F;
+   color: #832F3F;
+}
+
+.form-control::placeholder {
+   color: #832F3F;
+   opacity: 0.8;
+}
+
+.btn-block {
+   margin-top: 1rem;
+   background-color: #832F3F;
+   border: 1px solid transparent;
+   border-radius: 5px;
+}
+
+.btn-block:hover {
+   background-color: #6F2936;
+   border: 1px solid #832F3F;
+}
+
+.table-bordered{
+   text-align: center;
+   border: 2px solid #eac6cd;
+ 
+}

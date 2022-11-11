@@ -6,7 +6,7 @@ const MongoClient = require('mongodb').MongoClient
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-
+app.use(express.static('public'))
 
 MongoClient.connect('mongodb://127.0.0.1:27017', {
    useNewUrlParser: true,
@@ -44,22 +44,23 @@ app.post('/api/anyadir', (req, res) => {
 
 app.put('/api/modificar/:color', (req, res) => {
    app.locals.db
-   .collection("mesas")
-   .updateMany({ color: req.params.color }, { $set: { color: "azul" } }, (err, data) => {
+      .collection("mesas")
+      .updateMany({ color: req.params.color }, { $set: { color: 'granate' } }, (err, data) => {
          err
             ? res.send({ mensaje: 'Error: No se ha podido modificar la información en la base de datos', data: err })
-            : res.send({ mensaje:  data.modifiedCount > 0 ? 'El color de ' + data.modifiedCount + ' mesa(s) ha sido modificado' : 'No se han encontrado mesas para modificar', data })
+            : res.send({ mensaje: data.modifiedCount > 0 ? 'El color de ' + data.modifiedCount + ' mesa(s) ha sido modificado' : 'No se han encontrado mesas para modificar', data })
       })
 })
 
 
 app.delete('/api/borrar/:patas', (req, res) => {
+   console.log(req.params.patas)
    app.locals.db
-   .collection("mesas")
-   .deleteMany({ patas: parseInt(req.params.patas) }, {multi: true}, (err, data) => {
+      .collection("mesas")
+      .deleteMany({ patas: parseInt(req.params.patas) }, (err, data) => {
          err
             ? res.send({ mensaje: 'Error: No se ha podido eliminar el objeto de la base de datos', data: err })
-            : res.send({ mensaje: data.deletedCount > 0 ? data.deletedCount + ' mesa(s) eliminada(s)' : 'No se han encontrado mesas con esa cantidad de patas', data })
+            : res.send({ mensaje: data.deletedCount > 0 ? data.deletedCount + ' mesa(s) eliminada(s)' : 'No se han encontrado mesas con ' + req.params.patas + ' patas', data })
       })
 })
 
