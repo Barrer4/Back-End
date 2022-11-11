@@ -21,38 +21,48 @@ MongoClient.connect('mongodb://127.0.0.1:27017', {
 
 app.get('/api/series', (req, res) => {
    app.locals.db
-   .collection('series')
-   .find()
-   .toArray( (err, data) => {
-      err
-      ? res.send({ mensaje: 'Error: ', results: err })
-      : res.send({ mensaje: 'Ok: ', results: data })
-   })
+      .collection('series')
+      .find()
+      .toArray((err, data) => {
+         err
+            ? res.send({ mensaje: 'Error: No se ha podido leer la base de datos', results: err })
+            : res.send({ mensaje: 'Las series disponibles han sido presentadas', results: data })
+      })
 })
 
-app.get('/api/series/:serie', (req, res) => {
+app.get('/api/series/:titulo', (req, res) => {
+   console.log(req.query.titulo)
    app.locals.db
-   .collection('series')
-   .find({titulo: req.params.serie})
-   .toArray((err, data)=> {
-      err
-      ? res.send({ mensaje: 'Error: ', results: err })
-      : res.send({ mensaje: req.params, results: data })
-   })
+      .collection('series')
+      .find({ titulo: req.query.titulo })
+      .toArray((err, data) => {
+         err
+            ? res.send({ mensaje: 'Error: No se ha podido leer la base de datos', results: err })
+            : data.length > 0
+               ? res.send({ mensaje: req.query.titulo, results: data })
+               : res.send({ mensaje: req.query.titulo + ' no se encuentra en la base de datos' })
+      })
 })
 
-
-
-app.post('/api/nuevaSerie', (req,res)=> {
+app.post('/api/nuevaSerie', (req, res) => {
    app.locals.db
-   .collection('series')
-   .insertOne(req.body, (err, data) => {
-      err
-      ? res.send({ mensaje: 'Error: ', results: err })
-      : res.send({ mensaje: 'Serie almacenada en la base de datos', results: data })
-   })
-})
+      .collection('series')
+      .find({ titulo: req.body.titulo })
+      .toArray((err, data) => {
+         err
+            ? res.send({ mensaje: 'Error: No se ha podido leer la base de datos', data: err })
+            : data.length > 0
+               ? res.send({ mensaje: req.body.titulo + ' ya se encuentra en la base de datos', data: data })
+               : app.locals.db
+                  .collection('series')
+                  .insertOne(req.body, (err, data) => {
+                     err
+                        ? res.send({ mensaje: 'Error: ', data: err })
+                        : res.send({ mensaje: req.body.titulo + ' ha sido almacenada en la base de datos', data: data })
+                  })
+      })
 
+})
 
 app.listen(port, err => {
    err

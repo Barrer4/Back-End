@@ -1,0 +1,28 @@
+body {
+   background-color: #fffaf4;
+
+}
+
+.btn-group{
+   margin-top: 2rem;
+}
+.btn-lg {
+   width: 18rem;
+   height: 6rem;
+   padding: auto;
+   text-align: center;
+   line-height: 4.8rem;
+   margin: 1rem;
+   font-size: xx-large;
+   background-color: #ba8759;
+   color: white;
+   font-weight: 600;
+}
+
+
+.custom-select {
+   margin: auto;
+   margin-top: 5rem;
+   width: 50%;
+   justify-content: center;
+}

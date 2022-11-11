@@ -1,0 +1,39 @@
+body {
+   background-color: #EFF8EC;
+   font-family: 'Nunito', sans-serif;
+}
+
+#container {
+   margin: auto;
+   margin-top: 4rem;
+   display: flex;
+   justify-content: space-around;
+   height: min-content;
+}
+
+form {
+   margin-left: 4rem;
+   width: 40%;
+   justify-self: left;
+}
+
+button.btn.btn-block {
+   background-color: #3b6f29;
+   color: white;
+   margin-bottom: 1.5rem;
+}
+
+.form-group {
+   margin-bottom: 1.5rem;
+}
+
+#feedback {
+   font-size: x-large;
+   width: 30%;
+   height: max-content;
+   display: flex;
+   padding: 120px 1rem;
+   justify-content: center;
+   text-align: center;
+   border: 2px solid green;
+}
