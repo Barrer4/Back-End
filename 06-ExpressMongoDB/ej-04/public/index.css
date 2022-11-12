@@ -23,8 +23,9 @@ table {
 }
 
 #theFeedback {
-   border: 2px solid red;
    vertical-align: center;
-   height: 10rem;
+   font-size: x-large;
+   text-align: center;
+   min-height: 4rem;
 }
 
