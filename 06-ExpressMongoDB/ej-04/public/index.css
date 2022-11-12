@@ -1,0 +1,30 @@
+html {
+   display: table;
+   margin: auto;
+}
+
+body {
+   margin: 4rem;
+   font-family: 'Sono', sans-serif;
+   vertical-align: center;
+}
+
+h1 {
+   text-align: center;
+   margin-bottom: 2rem;
+}
+form {
+   margin-top: 4rem;
+   margin-bottom: 4rem;
+}
+
+table {
+   text-align: center;
+}
+
+#theFeedback {
+   border: 2px solid red;
+   vertical-align: center;
+   height: 10rem;
+}
+

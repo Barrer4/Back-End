@@ -5,47 +5,54 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Sono&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="index.css">
+   <title>Menús</title>
 </head>
 
 <body>
-   <form>
-      <input id="numero" type="number" placeholder="Numero" style="margin: 2px" /></br>
-      <input id="primero" type="text" placeholder="Primer plato" style="margin: 2px" /></br>
-      <input id="segundo" type="text" placeholder="Segundo plato" style="margin: 2px" /></br>
-      <input id="postre" type="text" placeholder="Postre" style="margin: 2px" /></br>
-      <input id="precio" type="text" placeholder="Precio" style="margin: 2px" /></br>
-      <button onclick="agregar()" type="button" style="margin: 2px">Añadir</button>
-      <button onclick="eliminar()" type="button" style="margin: 2px">Eliminar</button>
-   </form>
+   <h1 class="display-3">Menús</h1>
+   <div id="theBody" ></div>
+   <div>
+      <form>
+         <div class="row">
+            <div class="col">
+               <input id="numero" type="number" class="form-control" placeholder="Número">
+            </div>
+            <div class="col">
+               <input id="primero" type="text" class="form-control" placeholder="Primer plato">
+            </div>
+            <div class="col">
+               <input id="segundo" type="text" class="form-control" placeholder="Segundo plato">
+            </div>
+            <div class="col">
+               <input id="postre" type="text" class="form-control" placeholder="Postre">
+            </div>
+            <div class="col">
+               <input id="precio" type="number" class="form-control" step="0.01"  min="0" max="100" placeholder="Precio">
+            </div>
+            <div class="col">
+               <div class="d-grid gap-2">
+               <button type="button" class="btn btn-outline-dark" onclick="agregar()">Agregar</button>
+               </div>
+            </div>
+            <div class="col">
+               <div class="d-grid gap-2">
+               <button type="button" class="btn btn-outline-dark" onclick="editar()">Editar</button>
+               </div>
+            </div>
+         </div>
+      </form>
+   </div>
    <div id="theFeedback"></div>
 </body>
-<script>
-   
-      let numero = document.getElementById('numero').value
-      let primero = document.getElementById('primero').value
-      let segundo = document.getElementById('segundo').value
-      let postre = document.getElementById('postre').value
-      let precio = document.getElementById('precio').value
-
-     
-      function agregar() {
-         let data = {numero: numero, primero: primero, segundo: segundo, postre: postre, precio: precio}
-         
-      fetch('/api/nuevoMenu', {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json'},
-         body: JSON.stringify(data)
-
-      })
-         .then(res => res.json())
-         .then(res => { 
-            res.agregado
-               ? document.getElementById('theFeedback').innerHTML = '<p>El menú ha sido añadido a la base de datos</p>'
-               : document.getElementById('theFeedback').innerHTML = '<p>El menú NO ha sido añadido a la base de datos</p>'
-         })
-         }
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="script.js">
 </script>
 
 </html>
