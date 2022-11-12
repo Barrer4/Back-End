@@ -1,33 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
 </head>
+
 <body>
-<div div="theBody" style="text-align: center; justify-content: center;">
-   <div style="border: 1px solid black; margin: auto;  margin-top: 25px; margin-bottom: 25px; width: 300px; height: 200px; justify-content: center">
-   <h2>Buscar serie:</h2>
-   </br>
-   <form action="/api/series/:titulo" style="margin: 2px">
-      <input  name="titulo" type="text" placeholder="Título" style="margin: 2px"/></br>
-      <button type="submit" style="margin: 2px">Buscar</button>
-</form>
-</div>
-<div div="theBody" style="text-align: center; justify-content: center;">
-   <div style="border: 1px solid black; margin: auto; width: 300px; height: 200px; justify-content: center">
-<h2>Añadir serie:</h2>
-   <form action="/api/nuevaSerie" method="POST">
-      <input name="titulo" type="text" placeholder="Título" style="margin: 2px"/></br>
-      <input name="plataforma" type="text" placeholder="Plataforma" style="margin: 2px"/></br>
-      <input name="nota" type="number" placeholder="Nota" style="margin: 2px"/></br>
-      <button type="submit" style="margin: 2px">Añadir</button>
-   </form>
-</div>
-  
+   <div div="theBody" style="text-align: center; justify-content: center;">
+      <div
+         style="border: 1px solid black; margin: auto;  margin-top: 25px; margin-bottom: 25px; width: 300px; height: 200px; justify-content: center">
+         <h2>Mostrar series:</h2>
+         </br>
+         <form action="/api/series" style="margin: 2px">
+            <button type="submit" style="margin: 2px">Mostrar</button>
+         </form>
+      </div>
+   </div>
+
+   <div div="theBody" style="text-align: center; justify-content: center;">
+      <div
+         style="border: 1px solid black; margin: auto;  margin-top: 25px; margin-bottom: 25px; width: 300px; height: 200px; justify-content: center">
+         <h2>Buscar serie:</h2>
+         </br>
+         <form action="/api/series/:titulo">
+            <input name="titulo" type="text" placeholder="Título" style="margin: 2px" /></br>
+            <button type="submit" style="margin: 2px">Buscar</button>
+         </form>
+      </div>
+   </div>
+
+   <div div="theBody" style="text-align: center; justify-content: center;">
+      <div
+         style="border: 1px solid black; margin: auto;  margin-top: 25px; margin-bottom: 25px; width: 300px; height: 200px; justify-content: center">
+         <h2>Añadir serie:</h2>
+         <form action="/api/nuevaSerie" method="POST">
+            <input name="titulo" type="text" placeholder="Título" style="margin: 2px" /></br>
+            <input name="plataforma" type="text" placeholder="Plataforma" style="margin: 2px" /></br>
+            <input name="nota" type="number" placeholder="Nota" style="margin: 2px" /></br>
+            <button type="submit" style="margin: 2px">Añadir</button>
+         </form>
+      </div>
+   </div>
 </body>
-<script>
+<script src="script.js">
 </script>
+
 </html>

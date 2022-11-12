@@ -55,7 +55,7 @@ app.post('/api/nuevaSerie', (req, res) => {
                ? res.send({ mensaje: req.body.titulo + ' ya se encuentra en la base de datos', data: data })
                : app.locals.db
                   .collection('series')
-                  .insertOne(req.body, (err, data) => {
+                  .insertOne({...req.body, nota: parseInt(req.body.nota)}, (err, data) => {
                      err
                         ? res.send({ mensaje: 'Error: ', data: err })
                         : res.send({ mensaje: req.body.titulo + ' ha sido almacenada en la base de datos', data: data })
