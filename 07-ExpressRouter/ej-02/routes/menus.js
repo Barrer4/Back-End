@@ -18,40 +18,38 @@ menus.get('/', (req, res) => {
 menus.post('/nuevoMenu', (req, res) => {
    req.app.locals.db
       .collection('menus')
-      .insertOne({ nombre: req.body.nombre, precio: parseFloat(req.body.precio) }, (err, data) => {
+      .insertOne({ nombre: req.body.menu, precio: parseFloat(req.body.precio) }, (err, data) => {
          err
             ? res.send({ error: true, mensaje: 'Error al conectar con la base de datos de menus', data: err })
             : data.length < 1
-               ? res.send({ error: true, mensaje: 'No se ha podido registrar el menu ' + req.body.nombre + ' en la base de datos', data: data })
-               : res.send({ error: false, mensaje: 'El menu ' + req.body.nombre + ' ha sido añadido correctamente a la base de datos', data: data })
+               ? res.send({ error: true, mensaje: 'No se ha podido registrar el menu ' + req.body.menu + ' en la base de datos', data: data })
+               : res.send({ error: false, mensaje: 'El menu ' + req.body.menu + ' ha sido añadido correctamente a la base de datos', data: data })
       })
 })
 
 menus.post('/elegirMenu', (req, res) => {
    req.app.locals.db
       .collection('menus')
-      .find({ nombre: req.body.menu })
+      .find({ menu: req.body.menu })
       .toArray((err, data) => {
-         console.log(data[0].nombre, data[0].precio)
+         console.log(data[0].menu, data[0].precio)
          err
             ? res.send({ error: true, mensaje: 'Error al conectar con la base de datos de menus', data: err })
             : data.length < 1
                ? res.send({ error: true, mensaje: 'No hay menus registrados en la base de datos', data: data })
                : req.app.locals.db
                   .collection('hamburguesas')
-                  .find({ nombre: req.body.hamburguesa })
+                  .find({ hamburguesa: req.body.hamburguesa })
                   .toArray((err1, data1) => {
-
                      err1
                         ? res.send({ error: true, mensaje: 'Error al conectar con la base de datos de hamburguesas', data: err1 })
                         : data1.length < 1
                            ? res.send({ error: true, mensaje: 'No hay hamburguesas registradas en la base de datos', data: data1 })
                            : req.app.locals.db
                               .collection('bebidas')
-                              .find({ nombre: req.body.bebida })
+                              .find({ bebida: req.body.bebida })
                               .toArray((err2, data2) => {
                                  err2
-
                                     ? res.send({ error: true, mensaje: 'Error al conectar con la base de datos de bebidas', data: err2 })
                                     : data2.length < 1
                                        ? res.send({ error: true, mensaje: 'No hay bebidas registradas en la base de datos', data: data2 })

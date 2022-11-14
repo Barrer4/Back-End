@@ -1,27 +1,26 @@
 let productos = {
    menus: [
-      { nombre: "Grand Big Mongo", precio: 8.5 },
-      { nombre: "Big Mongo", precio: 8 },
-      { nombre: "MongoPollo", precio: 7.5 },
-      { nombre: "Cuarto de Mongo", precio: 7 },
-      { nombre: "MongoRoyal Deluxe", precio: 7 },
+      { "menu": "Grand Big Mongo", "precio": 8.5 },
+      { "menu": "Big Mongo", "precio": 8 },
+      { "menu": "MongoPollo", "precio": 7.5 },
+      { "menu": "Cuarto de Mongo", "precio": 7 },
+      { "menu": "MongoRoyal Deluxe", "precio": 7 },
    ],
    hamburguesas: [
-      { nombre: "Grand Big Mongo", precio: 6 },
-      { nombre: "Big Mongo", precio: 5.5 },
-      { nombre: "MongoPollo", precio: 5 },
-      { nombre: "Cuarto de Mongo", precio: 4.5 },
-      { nombre: "MongoRoyal Deluxe", precio: 4.5 },
+      { "hamburguesa": "Grand Big Mongo", "precio": 6 },
+      { "hamburguesa": "Big Mongo", "precio": 5.5 },
+      { "hamburguesa": "MongoPollo", "precio": 5 },
+      { "hamburguesa": "Cuarto de Mongo", "precio": 4.5 },
+      { "hamburguesa": "MongoRoyal Deluxe", "precio": 4.5 },
    ],
    bebidas: [
-      { nombre: "MongoCola", precio: 2 },
-      { nombre: "Fantongo", precio: 2 },
-      { nombre: "Agua", precio: 1 },
-      { nombre: "Mongo Brew", precio: 2.5 },
+      { "bebida": "MongoCola", "precio": 2 },
+      { "bebida": "Fantongo", "precio": 2 },
+      { "bebida": "Agua", "precio": 1 },
+      { "bebida": "Mongo Brew", "precio": 2.5 },
    ],
    patatas: [
-      { nombre: "MongoFries", precio: 1 }
+      { "patata": "MongoFries", "precio": 1 }
    ],
 }
 
-module.exports = productos
