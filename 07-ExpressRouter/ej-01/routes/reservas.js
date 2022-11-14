@@ -39,8 +39,8 @@ reservas.post('/checkIn', (req, res) => {
                                     apellido: data1[0].apellido, dni: data1[0].dni
                                  },
                                  habitacion: data2[0].habitacion,
-                                 checkIn: (new Date(req.body.checkIn)).getTime(),
-                                 checkOut: (new Date(req.body.checkOut)).getTime()
+                                 checkIn: Date(req.body.checkIn),
+                                 checkOut: Date(req.body.checkOut)
                               }, (err3, data3) => {
                                  err3
                                     ? res.send({ error: true, mensaje: 'Error al conectar con la base de datos', data: err3 })
@@ -48,14 +48,14 @@ reservas.post('/checkIn', (req, res) => {
                                        ? res.send({ error: true, mensaje: 'No se ha podido registrar la reserva en la base de datos' })
                                        : req.app.locals.db
                                           .collection('habitaciones')
-                                          .updateOne({ habitacion: data2[0].habitacion }, { $set: { disponible: false } }, (err4, data4) => {
+                                          .updateOne({ habitacion: req.body.habitacion}, { $set: { disponible: false } }, (err4, data4) => {
                                              err4
                                                 ? res.send({ error: true, mensaje: 'Error al conectar con la base de datos', data: err4 })
-                                                : data4.modifiedCount < 1
+                                                : data4[0].modifiedCount < 1
                                                    ? res.send({
                                                       error: true, mensaje: 'No se ha modificado la habitación ' + data2[0].habitacion, data: err4
                                                    })
-                                                   : res.send({ error: false, mensaje: 'La habitación ' + data2[0].habitacion + ' ha sido reservada por el cliente ' + data1[0].dni, data: data3, data4 })
+                                                   : res.send({ error: false, mensaje: 'La habitación ' + req.body.habitacion+ ' ha sido reservada por el cliente ' + data1[0].dni, data: data3, data4 })
                                           })
                               })
                   })
@@ -75,14 +75,15 @@ reservas.post('/checkOut', (req, res) => {
                : req.app.locals.db
                   .collection('reservas')
                   .updateOne({ "cliente.dni": req.body.dni }, { $currentDate: { checkOut: { $type: "date" } } }, (err2, data2) => {
+                     console.log(this.checkout)
                      err2
                         ? res.send({ error: true, mensaje: 'Error al conectar con la base de datos', data: err2 })
                         : req.app.locals.db
                            .collection('habitaciones')
-                           .updateOne({ habitacion: data1[0].habitacion }, { $set: { disponible: true } }, (err3, data3) => {
+                           .updateOne({ habitacion: req.body.habitacion}, { $set: { disponible: true } }, (err3, data3) => {
                               err3
                                  ? res.send({ error: true, mensaje: 'Error al conectar con la base de datos', data: err3 })
-                                 : res.send({ error: false, mensaje: 'El checkOut de la habitación ' + data1[0].habitacion + ' se ha ejecutado correctamente', data: data2, data3 })
+                                 : res.send({ error: false, mensaje: 'El checkOut de la habitación ' + req.body.habitacion + ' se ha ejecutado correctamente', data: data2, data3 })
                            })
                   })
       })

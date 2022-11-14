@@ -8,16 +8,16 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
    <link rel="stylesheet" href="index.css">
-  
+
    <title>Hotel Letoh</title>
 </head>
 
 <body onload="start()" style="text-align:center">
-   <nav class="navbar navbar-expand-lg bg-light">
+   <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
          <a class="navbar-brand" href="/">Home</a>
-         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+         <button class="navbar-toggler" type="button" class="btn btn-sm btn-outline-dark" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
          </button>
          <div class="collapse navbar-collapse" id="navbarNav">
@@ -37,46 +37,60 @@
    </nav>
 
    <div id="home">
-      <div id="clientes" class="center"></div>
-      <div id="c-feedback"></div>
+      <div id="clientes" class=""></div>
       <div id="habitaciones" class="center"></div>
-      <div id="h-feedback"></div>
-      <div id="reservas" class="center">  </div>
-      <div id="r-feedback"></div>
-    
+      <div id="reservas" class="center"> </div>
 
       <div id="forms">
-      </br>
-         <form style="margin: 20px;">
+         <div id="container">
             <h4>Gestión de clientes:</h4>
-            <input id="c-nombre" type="text" placeholder="Nombre" />
-            <input id="c-apellido" type="text" placeholder="Apellido" />
-            <input id="c-dni" type="text" placeholder="DNI" />
-            <button type="button" onclick="agregarCliente()">Añadir</button>
-            <button type="button" onclick="editarCliente()">Editar</button>
-         </form>
-      </br>
-         <form id="h-form" style="margin: 20px;">
+            <form style="margin: 20px;">
+               <div id="frm-container" class="d-grid gap-2 d-md-flex justify-content-md-center">
+                  <input id="c-nombre" type="text" placeholder="Nombre" />
+                  <input id="c-apellido" type="text" placeholder="Apellido" />
+                  <input id="c-dni" type="text" placeholder="DNI" />
+               </div>
+               <div id="btn-container" class="d-grid gap-2 d-md-flex justify-content-md-center">
+                  <button type="button" class="btn btn-sm btn-outline-dark" onclick="agregarCliente()">Añadir</button>
+                  <button type="button" class="btn btn-sm btn-outline-dark" onclick="editarCliente()">Editar</button>
+               </div>
+            </form>
+         </div>
+         <div id="container">
             <h4>Gestión de habitaciones:</h4>
-            <input id="habitacion" type="text" placeholder="Habitación" />
-            <input id="disponible" type="text" placeholder="Disponibilidad" />
-            <button type="button" onclick="agregarHabitacion()">Agregar</button>
-            <button type="button" onclick="editarHabitacion()">Editar</button>
-         </form>
-      </br>
-         <form id="r-form" style="margin: 20px;">
+            <form id="h-form" style="margin: 20px;">
+               <div id="frm-container" class="d-grid gap-2 d-md-flex justify-content-md-center">
+                  <input id="habitacion" type="text" placeholder="Habitación" />
+                  <input id="disponible" type="text" placeholder="Disponibilidad" />
+               </div>
+               <div id="btn-container" class="d-grid gap-2 d-md-flex justify-content-md-center">
+                  <button type="button" class="btn btn-sm btn-outline-dark"
+                     onclick="agregarHabitacion()">Añadir</button>
+                  <button type="button" class="btn btn-sm btn-outline-dark" onclick="editarHabitacion()">Editar</button>
+               </div>
+            </form>
+         </div>
+
+         <div id="container">
             <h4>Gestión de reservas:</h4>
-            <input id="dni" type="text" placeholder="DNI" />
-            <input id="r-habitacion" type="text" placeholder="Habitación" />
-            <input id="r-checkIn" type="date" placeholder="Fecha de entrada" />
-            <input id="r-checkOut" type="date" placeholder="Fecha de salida" />
-            <button type="button" onclick="agregarReserva()">Reservar</button>
-            <button type="button" onclick="finalizarReserva()">Finalizar</button>
-         </form>
+            <form id="r-form" style="margin: 20px;">
+               <div id="frm-container" class="d-grid gap-2 d-md-flex justify-content-md-center">
+                  <input id="dni" type="text" placeholder="DNI" />
+                  <input id="r-habitacion" type="text" placeholder="Habitación" />
+                  <input id="r-checkIn" type="date" placeholder="Fecha de entrada" />
+                  <input id="r-checkOut" type="date" placeholder="Fecha de salida" />
+               </div>
+               <div id="btn-container" class="d-grid gap-2 d-md-flex justify-content-md-center">
+                  <button type="button" class="btn btn-sm btn-outline-dark" onclick="agregarReserva()">Reservar</button>
+                  <button type="button" class="btn btn-sm btn-outline-dark"
+                     onclick="finalizarReserva()">Finalizar</button>
+               </div>
+            </form>
+         </div>
       </div>
    </div>
 
-
+   <div id="feedback"></div>
 
 
 </body>
