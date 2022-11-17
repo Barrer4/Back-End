@@ -17,15 +17,12 @@ const albumSchema = mongoose.Schema({
       required: [true, 'El año es un campo obligatorio'],
    }
    ,
-   genre: String,
+   genre:  String,
    stock: {
       type: Number,
       required: [true, 'El género es un campo obligatorio'],
-},
-   format: {
-   type: String,
-   required: [true, 'El formato es un campo obligatorio'],
-},
+   },
+   format: String,
 })
 
-module.exports = mongoose.model('album', albumSchema)
+module.exports = mongoose.model('Album', albumSchema)

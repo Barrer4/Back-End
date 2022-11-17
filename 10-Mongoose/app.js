@@ -1,7 +1,8 @@
 const express = require('express')
 const app = express()
-const port = (process.env.PORT || 3000)
 const mongoose = require('mongoose')
+const port = (process.env.PORT || 3000)
+mongoose.set('debug', true)
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -18,27 +19,29 @@ app.get('/albums', (req, res) => {
    Album.find({}, (err, data) => {
       err
          ? res.send({ error: true, mensaje: 'No se ha podido consultar la base de datos', data: err })
-         : res.send({ error: false, mensaje: 'Petición satisfecha', data: data })
+         : res.send({ error: false, mensaje: 'Petición satisfecha', data })
    })
 })
 
 app.get('/album/:title', (req, res) => {
-   Album.find(req.params.title, (err, data) => {
+   console.log(req.params.title)
+   
+   Album.find({title: req.params.title}, (err, data) => {
       err
          ? res.send({ error: true, mensaje: 'No se ha podido consultar la base de datos', data: err })
-         : res.send({ error: false, mensaje: 'Petición satisfecha', data: data })
+         : res.send({ error: false, mensaje: 'Petición satisfecha', data })
    })
 })
 
 app.post('/newAlbum', (req, res) => {
-   let Album = new Album({
+   let newAlbum = new Album({
       _id: new mongoose.Types.ObjectId(),
       ...req.body
    })
-   Album.save((err, data) => {
+   newAlbum.save((err, data) => {
       err
          ? res.send({ error: true, mensaje: 'No se ha podido grabar en la base de datos', data: err })
-         : res.send({ error: false, mensaje: 'Álbum añadido a la base de datos', data: data })
+         : res.send({ error: false, mensaje: 'Álbum añadido a la base de datos', data })
    })
 })
 
@@ -54,7 +57,7 @@ app.put('/modify', (req, res) => {
    }, (err, data) => {
       err
          ? res.send({ error: true, mensaje: 'No se ha podido modificar el álbum en la base de datos', data: err })
-         : res.send({ error: false, mensaje: 'Petición satisfecha', data: data })
+         : res.send({ error: false, mensaje: 'Petición satisfecha', data })
    })
 })
 
@@ -62,7 +65,7 @@ app.delete('/delete', (req, res) => {
    Album.deleteOne({ title: req.body.title }, (err, data) => {
       err
          ? res.send({ error: true, mensaje: 'No se ha podido eliminar el álbum de la base de datos', data: err })
-         : res.send({ error: false, mensaje: 'Petición satisfecha', data: data })
+         : res.send({ error: false, mensaje: 'Petición satisfecha', data })
    })
 })
 
